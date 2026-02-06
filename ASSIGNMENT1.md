@@ -13,9 +13,10 @@
 <img src = "screenshots/lab1p1.png" height = "400" width = "750">
 - Within this file, we find the URL to the administrative interface i.e ```/administrator-panel```.
 - Modify the URL once again by adding the newly found URL and the administrator interface can be accessed. The user ```carlos``` can now be deleted easily.
-![administrator_interface]()
+
 <img src = "screenshots/lab1p2.png" height = "400" width = "750">
-- The solution of this lab was based on unhindered access to both the files in the server and to the administration interface,
+
+- The solution of this lab was based on unhindered access to both the files in the server and to the administration interface.
 
 ### LAB 2: Unprotected Admin Functionality With Unpredictable URL
 ### Solution:
@@ -27,12 +28,13 @@
   4. ```<header class="navigation-header> ... </header>```
   5. ```<section class = "top-links"> ... </section>```
   6. ```<script> ... </script>```
-  
+   
   <img src="screenshots/lab2p1.png" height = "700" width = "600">
+
 - Within the Javascript snippet, search for the attribute to be added to the URL in case of an admin signing in to their account.
   ```js 
   adminPanelTag.setAttribute('href', '/admin-4ihrin');
   ```
 - Copy the attribute and add to the URL which will grant access to the administration interface.
-  ![admin_login]()
+
   <img src = "screenshots/lab2p2.png" height = "400" width = "750">
