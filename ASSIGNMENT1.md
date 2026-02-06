@@ -10,8 +10,10 @@
 ### Solution:
 - A link to a shopping website is provided. The goal is to access the user list through the unprotected admin panel and delete the user ```carlos```.
 - To solve this lab, modify the site URL by adding ```/robots.txt```. Unprotected websites usually keep sensitive data within their servers in files named as such.
+
 <img src = "screenshots/lab1p1.png" height = "400" width = "750">
-- Within this file, we find the URL to the administrative interface i.e ```/administrator-panel```.
+
+- Within this file, we find the URL to the administrative interface ```/administrator-panel```.
 - Modify the URL once again by adding the newly found URL and the administrator interface can be accessed. The user ```carlos``` can now be deleted easily.
 
 <img src = "screenshots/lab1p2.png" height = "400" width = "750">
