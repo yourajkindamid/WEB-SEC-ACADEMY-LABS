@@ -10,10 +10,11 @@
 ### Solution:
 - A link to a shopping website is provided. The goal is to access the user list through the unprotected admin panel and delete the user ```carlos```.
 - To solve this lab, modify the site URL by adding ```/robots.txt```. Unprotected websites usually keep sensitive data within their servers in files named as such.
-![robots.txt](screenshots/lab1p1.png)
+<img src = "screenshots/lab1p1.png" height = "400" width = "750">
 - Within this file, we find the URL to the administrative interface i.e ```/administrator-panel```.
 - Modify the URL once again by adding the newly found URL and the administrator interface can be accessed. The user ```carlos``` can now be deleted easily.
-![administrator_interface](screenshots/lab1p2.png)
+![administrator_interface]()
+<img src = "screenshots/lab1p2.png" height = "400" width = "750">
 - The solution of this lab was based on unhindered access to both the files in the server and to the administration interface,
 
 ### LAB 2: Unprotected Admin Functionality With Unpredictable URL
@@ -27,10 +28,11 @@
   5. ```<section class = "top-links"> ... </section>```
   6. ```<script> ... </script>```
   
-  ![js_script](screenshots/lab2p1.png)
+  <img src="screenshots/lab2p1.png" height = "700" width = "600">
 - Within the Javascript snippet, search for the attribute to be added to the URL in case of an admin signing in to their account.
   ```js 
   adminPanelTag.setAttribute('href', '/admin-4ihrin');
   ```
 - Copy the attribute and add to the URL which will grant access to the administration interface.
-  ![admin_login](screenshots/lab2p2.png)
+  ![admin_login]()
+  <img src = "screenshots/lab2p2.png" height = "400" width = "750">
