@@ -2,7 +2,7 @@
 # Access Control Vulnerabilities and Privilege Escalation
 
 ## Concept (LAB 1 - 3)
-- The first lab regarding access control vulnerabilites is based on **Vertical Privilege Escalation**.
+- The first three labs regarding access control vulnerabilites are based on **Vertical Privilege Escalation**.
 - Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Vertical Privilege Escalation** is a type of an access control vulnerability.
 - In this vulnerability, a user can access functionality on a web application for which they are not granted access to by the admin.
   
@@ -31,7 +31,9 @@
   5. ```<section class = "top-links"> ... </section>```
   6. ```<script> ... </script>```
    
+
   <img src="screenshots/lab2p1.png" height = "700" width = "600">
+
 
 - Within the Javascript snippet, search for the attribute to be added to the URL in case of an admin signing in to their account.
   ```js 
@@ -62,3 +64,34 @@
   Refresh the website and an option for the 'Admin panel' will appear.
 
   <img src = "screenshots/lab3p5.png" height = "400" width = "700">
+
+## Concept (LAB 4 - 6)
+- The next three labs regarding access control vulnerabilites are based on **Horizontal Privilege Escalation**.
+- Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Horizontal Privilege Escalation** is a type of an access control vulnerability.
+- In this vulnerability, a user can access resources of other users on a web application aside from the same resources provided to them by the web application.
+
+### LAB 4: User Role Controlled by Request Parameter
+### Solution:
+- In this lab, we are given a blogging website and we have to submit the API key for user ```carlos``` which will be available if we login to his account. The accounts on this website have a 'Globally Unique Identifier' (GUID) which is used to identify users and prevent ```Insecure Direct Object Reference (IDOR)``` vulnerabilities.
+
+  > IDOR vulnerabilities are when URL parameter values, which users can control, are used to access resources.
+
+- To solve this lab, find the post(s) made by the user ```carlos``` and click on his profile name.
+  
+  *NOTE: The posts and GUID will be different for each lab attempt.*
+
+    <img src = "screenshots/lab4p1.png" height = "500" width = "700">
+
+    <img src = "screenshots/lab4p2.png" height = "500" width = "700">
+
+- The profile will show the posts made by the user and in the URL, the GUID for the user will be visible.
+
+  ```web-security-academy.net/blogs?userId=6cb87e0a-bb24-4459-9437-ab8ed20f434b```
+
+  <img src = "screenshots/lab4p3.png" height = "500" width = "700">
+- Copy this GUID and sign in to your account.
+  
+  <img src = "screenshots/lab4p4.png" height = "500" width = "700">
+- Replace your GUID in the URL with the copied GUID.
+  <img src = "screenshots/lab4p5.png" height = "500" width = "700">
+- The required account and the API key will now be visible.
