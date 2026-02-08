@@ -24,6 +24,8 @@
 ### Solution:
 - To solve this lab, inspect the elements on this website to find the JavaScript snippet that acts as the authenticator for the administration interface.
 - Within the 'Elements' tab in 'Developer Tools' follow the following pattern when checking different elements:
+
+
   1. ```<div theme> ... </div>```
   2. ```<section class = "maincontainer"> ... </section>```
   3.  ```<div class="container is-page> ... </div>```
@@ -65,7 +67,7 @@
 
   <img src = "screenshots/lab3p5.png" height = "400" width = "700">
 
-## Concept (LAB 4 - 6)
+## Concept (LAB 4 - 5)
 - The next three labs regarding access control vulnerabilites are based on **Horizontal Privilege Escalation**.
 - Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Horizontal Privilege Escalation** is a type of an access control vulnerability.
 - In this vulnerability, a user can access resources of other users on a web application aside from the same resources provided to them by the web application.
@@ -89,9 +91,64 @@
   ```web-security-academy.net/blogs?userId=6cb87e0a-bb24-4459-9437-ab8ed20f434b```
 
   <img src = "screenshots/lab4p3.png" height = "500" width = "700">
-- Copy this GUID and sign in to your account.
+
+- Copy this GUID and sign in to this user's account.
   
   <img src = "screenshots/lab4p4.png" height = "500" width = "700">
-- Replace your GUID in the URL with the copied GUID.
+
+- Replace the provided GUID in the URL with the copied GUID.
+- 
   <img src = "screenshots/lab4p5.png" height = "500" width = "700">
+
 - The required account and the API key will now be visible.
+
+### LAB 5: User ID Controlled by Request Parameter with Password Disclosure
+### Solution:
+
+*NOTE: This lab will deal with both horizontal and vertical escalation.*
+
+- In this lab we are given a shopping website and are tasked with finding the username and password of the web application admin in order to remove the user ```carlos```.
+- To solve this lab, start by going logging in to the account by going to the 'My Account' tab and using the username and password provided in the lab introduction.
+- After signing in, the 'My Account' tab will will be changed within the website. This tab will now provide the function of updating the email or changing the password. It prefills the password space with a masked input of the current password.
+
+  <img src = "screenshots/lab5p1.png" height = "500" width = "800">
+
+- Replace the URL of the 'My Account' tab from
+  
+  ```js
+  web-security-academy.net/my-account?id=wiener
+  ```
+
+  to
+
+  ```js
+  web-security-academy.net/my-account?id=administrator
+  ```
+
+  We will now be able to see the 'My Account' tab for the admin.
+
+  <img src = "screenshots/lab5p3.png" height = "500" width = "700">
+
+- To find the password for the admin account from the masked input, inspect the web elements in this pattern:
+
+
+  1. ```<div theme> ... </div>```
+  2. ```<section class = "maincontainer"> ... </section>```
+  3. ```<div class="container is-page> ... </div>```
+  4. ```<div id="account-content"> ... </div>```
+  5. ```<form class="login-form" action="/my-account/change-password" method="POST"> ... </form>```
+  6. ```<input required="" type="password" name="password" value="sn9dwouuhjj97ihqqw36">```
+
+
+  <img src = "screenshots/lab5p4.png" height = "700" width = "700">
+
+  The 'value' in the 'input' element named 'password' is the admin account password. Copy this value.
+- Log out as user and login back again using the username 'administrator' and use the copied password.
+- As the admin, a new tab will be present on the website named 'Admin Panel'.
+
+  <img src = "screenshots/lab5p5.png" height = "100" width = "400">
+
+  The user ```carlos``` can be deleted in this panel.
+
+  <img src = "screenshots/lab5p6.png" height = "300" width = "800">
+
