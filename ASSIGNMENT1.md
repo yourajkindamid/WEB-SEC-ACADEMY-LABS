@@ -68,7 +68,7 @@
   <img src = "screenshots/lab3p5.png" height = "400" width = "700">
 
 ## Concept (LAB 4 - 6)
-- The next three labs regarding access control vulnerabilites are based on **Horizontal Privilege Escalation**.
+- The next labs regarding access control vulnerabilites are based on **Horizontal Privilege Escalation**.
 - Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Horizontal Privilege Escalation** is a type of an access control vulnerability.
 - In this vulnerability, a user can access resources of other users on a web application aside from the same resources provided to them by the web application.
 
@@ -175,5 +175,41 @@
 
   The user ```carlos``` can be deleted in this panel.
 
-  <img src = "screenshots/lab5p6.png" height = "300" width = "800">
+  <img src = "screenshots/lab5p6.png" height = "200" width = "700">
 
+### LAB 7: User Role Controlled by Request Parameter, with Data Leakage in Redirect
+### Solution:
+- In this lab we are provided a shopping website and are tasked with finding the the API key for user ```carlos```.
+- This lab is an advanced version of Lab 4 and requires the usage of BurpSuite.
+- The concept is similar to Lab 4  except that directly trying to change the ID within the URL from the user of the provided credentials to the targeted user is not possible.  This is because the web applications now detects unauthorized attempts and redirects back to the login page.
+- To solve this lab, start BurpSuite. Within the 'Proxy' tab in Burp, select the 'Intercept' tab and open this lab in the BurpSuite associated Chromium browser.
+
+  <img src = "screenshots/lab7p1.png" height = "400" width = "700">
+
+- Do not start intercepting the HTTP requests and responses until you are logged into your account as intercepting and forwarding these messages will be a wastage of time.
+- After you are logged in using the provided credentials, similar to Lab 4, change the URL parameter i.e
+
+  from
+  ```
+  web-security-academy.net/my-account?id=wiener
+  ```
+  to
+  ```
+  web-security-academy.net/my-account?id=carlos
+  ```
+  Make sure to turn intercept on before this step. Enter the modified URL.
+- The 'GET' request to the server for the account of ```?id=carlos``` will be visible in the list of intercepted requests.
+
+  <img src = "screenshots/lab7p2.png" height = "500" width = "800">
+
+  Forward this request.
+
+- Switch tabs from 'Intercept' to 'HTTP history'. On top or near the top of the list, select the intercepted 'GET' request (for ```carlos```) that we just forwarded. The request and response from the server will be visible.
+
+  <img src = "screenshots/lab7p3.png" height = "500" width = "800">
+
+- While on the browser, we are redirected back to the login page, we learn through Burp that our request is not ignored. Inside the response, we find that the server has fullfilled our 'GET' request. The response contains the target account and all the data on it.
+
+  <img src = "screenshots/lab7p4.png" height = "500" width = "800">
+
+- Find the API key from within the website elements.
