@@ -1,8 +1,8 @@
 # PORTSWIGGER WEB SECURITY ACADEMY
 # Access Control Vulnerabilities and Privilege Escalation
 
-## Concept (LAB 1 - 3)
-- The first three labs regarding access control vulnerabilites are based on **Vertical Privilege Escalation**.
+## Concept (LAB 1 - 4)
+- The first four labs regarding access control vulnerabilites are based on **Vertical Privilege Escalation**.
 - Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Vertical Privilege Escalation** is a type of an access control vulnerability.
 - In this vulnerability, a user can access functionality on a web application for which they are not granted access to by the admin.
   
@@ -67,12 +67,48 @@
 
   <img src = "screenshots/lab3p5.png" height = "400" width = "700">
 
-## Concept (LAB 4 - 6)
+
+### LAB 4: User Role can be Modified in User Profile
+### Solution:
+- In this lab, we have an admin panel at ```/admin``` which is only accessible for users with a ```roleid=2```. We have to access the admin panel in order to delete the user ```carlos```.
+  
+  <img src = "screenshots/vertlab4p1.png" height = "400" width = "700">
+
+- To solve this lab, we are going to need Burp Suite. Start BurpSuite and within the 'Proxy' tab in Burp, select the 'Intercept' tab and open this lab in the BurpSuite associated Chromium browser.
+
+  <img src = "screenshots/lab7p1.png" height = "400" width = "700">
+
+- Do not start intercepting the HTTP requests and responses until the account is logged into as intercepting and forwarding these messages will be a wastage of time.
+- After logging into the account using the provided credentials through the 'My Account' tab, the user's panel will be visible.
+  
+    <img src = "screenshots/vertlab4p2.png" height = "300" width = "700">
+  
+- Before this step, start intercepting requests in Burp by turning on 'Intercept' in Burp. Now, update your email by entering any text of this format 'text@text'.
+- Burp will immediately intercept this POST request. Select this request and edit it so that it not only changes the email parameter for this user but also the 'roleid' parameter.
+
+  <img src = "screenshots/vertlab4p3.png" height = "500" width = "700">
+
+
+- Forward this request along with any other request that pops up afterwards until you see this change on the website:
+  
+  <img src = "screenshots/vertlab4p4.png" height = "100" width = "300">
+
+- Select the 'Admin Panel' and remove the user ```carlos```.
+  
+  <img src = "screenshots/vertlab4p5.png" height = "200" width = "800">
+
+
+
+> NOTE: In order to see all the parameters available for a user alongwith 'email' and 'roleid', go to the 'HTTP History' tab within the 'Proxy' tab on Burp. Select the POST request ```/my-account/change-email``` and go through the response (which is a JSON file) for this request to see all the parameters within. 
+
+  <img src = "screenshots/vertlab4p6.png" height = "500" width = "700">
+   
+## Concept (LAB 5 - 8)
 - The next labs regarding access control vulnerabilites are based on **Horizontal Privilege Escalation**.
 - Access control is defined as restrictions on who or what is allowed to access resources or functionality on a site. **Horizontal Privilege Escalation** is a type of an access control vulnerability.
 - In this vulnerability, a user can access resources of other users on a web application aside from the same resources provided to them by the web application.
 
-### LAB 4: User Role Controlled by Request Parameter
+### LAB 5: User Role Controlled by Request Parameter
 ### Solution:
 - In this lab, we are given a shopping website and we have to submit the API key for user ```carlos``` which will be available if we login to his account.
 - This lab can be solved on the basis of ```Insecure Direct Object Reference (IDOR)``` vulnerabilities.
@@ -99,7 +135,7 @@
     <img src = "screenshots/newlab4p2.png" height = "400" width = "800">
 
 
-### LAB 5: User Role Controlled by Request Parameter, with Unpredictable User IDs
+### LAB 6: User Role Controlled by Request Parameter, with Unpredictable User IDs
 ### Solution:
 - In this lab, we are given a blogging website and we have to submit the API key for user ```carlos``` which will be available if we login to his account. The accounts on this website have a 'Globally Unique Identifier' (GUID) which is used to identify users and prevent ```Insecure Direct Object Reference (IDOR)``` vulnerabilities.
 
@@ -127,7 +163,7 @@
 
 - The required account and the API key will now be visible.
 
-### LAB 6: User ID Controlled by Request Parameter with Password Disclosure
+### LAB 7: User ID Controlled by Request Parameter with Password Disclosure
 ### Solution:
 
 *NOTE: This lab will deal with both horizontal and vertical escalation.*
@@ -177,7 +213,7 @@
 
   <img src = "screenshots/lab5p6.png" height = "200" width = "700">
 
-### LAB 7: User Role Controlled by Request Parameter, with Data Leakage in Redirect
+### LAB 8: User Role Controlled by Request Parameter, with Data Leakage in Redirect
 ### Solution:
 - In this lab we are provided a shopping website and are tasked with finding the the API key for user ```carlos```.
 - This lab is an advanced version of Lab 4 and requires the usage of BurpSuite.
