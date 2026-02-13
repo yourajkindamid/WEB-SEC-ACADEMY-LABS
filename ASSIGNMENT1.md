@@ -249,3 +249,36 @@
   <img src = "screenshots/lab7p4.png" height = "500" width = "800">
 
 - Find the API key from within the website elements.
+  
+### LAB 9: Insecure direct object references
+### Solution:
+- In this lab, we are tasked with finding the password for the user ```carlos``` so that we can log into their account.
+- This website has an interesting functionality where we can engage in a live chat with a bot/user. We also get the option to retrieve the transcripts of our conversation.
+- IDOR vulnerabilities have been described in previous labs. It is understandable that the solution to this lab lies in changing a URL parameter to access the password.
+To solve this lab, start BurpSuite. Within the 'Proxy' tab in Burp, select the 'Intercept' tab and open this lab in the BurpSuite associated Chromium browser.
+
+  <img src = "screenshots/lab7p1.png" height = "400" width = "700">
+
+- Do not start intercepting the HTTP requests and responses until you reach the 'Live Chat' tab and have sent at least one message to the bot as intercepting and forwarding these messages will be a wastage of time.
+- After sending at least one message to the bot, select the option to get the transcript of the conversation. Forward the POST request for downloading the transcript:
+  ```
+  web-security-academy.net/download-transcript
+  ```
+
+  <img src = "screenshots/lab9p1.png" height = "200" width = "700">
+
+- Notice in the request that the response to the previous request creates another request for downloading a text file titled '2.txt'
+
+  <img src = "screenshots/lab9p2.png" height = "500" width = "800">
+
+- Edit the request from '2.txt' to '1.txt'.
+
+  <img src = "screenshots/lab9p3.png" height = "400" width = "800">
+
+- The downloaded '1.txt' will contain the password the password for the user ```carlos```.
+  
+  <img src = "screenshots/lab9p4.png" height = "200" width = "600">
+
+- We can now login to the account.
+
+  <img src = "screenshots/lab9p5.png" height = "300" width = "600">
